@@ -1,0 +1,133 @@
+:root {
+  --text: #ffffff;
+  --muted: rgba(255, 255, 255, 0.72);
+  --glass: rgba(14, 28, 52, 0.42);
+  --glass-light: rgba(255, 255, 255, 0.16);
+  --line: rgba(255, 255, 255, 0.22);
+  --accent: #7cc4ff;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 28px 16px 48px;
+  background-image: url("wethar.jpg"), linear-gradient(160deg, #2f80ed, #8fd3ff);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* soft dark layer so white text stays readable on any photo */
+body::before {
+  content: "";
+  position: fixed; inset: 0;
+  background: linear-gradient(180deg, rgba(8, 20, 40, 0.15), rgba(8, 20, 40, 0.55));
+  z-index: 0;
+}
+
+/* Vertical column, like a phone screen */
+.app { position: relative; z-index: 1; width: 100%; max-width: 400px; }
+
+/* ---------- Search ---------- */
+.search {
+  display: flex; gap: 6px; padding: 6px;
+  background: var(--glass-light);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+.search input {
+  flex: 1; min-width: 0; padding: 10px 16px; font: inherit; font-size: 0.95rem;
+  color: var(--text); background: transparent; border: none; outline: none;
+}
+.search input::placeholder { color: var(--muted); }
+.search button {
+  padding: 10px 20px; font: inherit; font-weight: 600; cursor: pointer;
+  color: #0b2038; background: #fff; border: none; border-radius: 999px;
+}
+.search button:hover { background: #e6f3ff; }
+
+.loc-btn {
+  display: block; margin: 12px auto 0; padding: 6px 4px; cursor: pointer;
+  font: inherit; font-size: 0.9rem; color: var(--text);
+  background: none; border: none; border-bottom: 1px solid var(--line);
+}
+.loc-btn:hover { border-bottom-color: #fff; }
+
+input:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+.message { margin: 16px 4px 0; min-height: 1.4em; text-align: center; color: var(--text); text-shadow: 0 1px 6px rgba(0,0,0,0.5); }
+
+/* ---------- Suggestions ---------- */
+.suggestions { list-style: none; margin-top: 8px; }
+.suggestions li + li { margin-top: 6px; }
+.suggestions button {
+  width: 100%; text-align: left; padding: 12px 16px; font: inherit; font-size: 0.95rem; cursor: pointer;
+  color: var(--text); background: var(--glass);
+  border: 1px solid var(--line); border-radius: 14px;
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+}
+.suggestions button:hover { background: rgba(14, 28, 52, 0.6); }
+
+/* ---------- Weather card (vertical) ---------- */
+.card {
+  margin-top: 20px; padding: 32px 26px 28px; text-align: center;
+  background: var(--glass);
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+.card[hidden] { display: none; }
+
+.place { font-size: 1.25rem; font-weight: 600; }
+.updated { margin-top: 4px; font-size: 0.78rem; color: var(--muted); }
+
+.temp {
+  margin-top: 22px; font-size: 6.5rem; font-weight: 300; line-height: 1; letter-spacing: -0.04em;
+}
+.condition { margin-top: 8px; font-size: 1.15rem; font-weight: 400; color: var(--muted); }
+
+/* details: stacked rows */
+.details { margin-top: 26px; text-align: left; border-top: 1px solid var(--line); }
+.details div {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding: 13px 2px; border-bottom: 1px solid var(--line);
+}
+.details dt { color: var(--muted); font-size: 0.95rem; }
+.details dd { font-weight: 600; }
+
+/* 5 day forecast: stacked rows */
+.forecast-title { margin-top: 26px; text-align: left; font-size: 0.95rem; font-weight: 600; color: var(--muted); }
+.forecast { list-style: none; margin-top: 6px; text-align: left; }
+.forecast li {
+  display: grid; grid-template-columns: 1fr auto; gap: 2px 12px;
+  padding: 12px 2px; border-bottom: 1px solid var(--line);
+}
+.forecast li:last-child { border-bottom: none; }
+.f-day { font-weight: 600; }
+.f-temps { font-weight: 600; text-align: right; }
+.f-temps span { color: var(--muted); font-weight: 400; margin-left: 8px; }
+.f-cond { grid-column: 1 / -1; font-size: 0.85rem; color: var(--muted); }
+
+/* ---------- Background changes with weather ----------
+   Clear weather uses your wethar.jpg. Add the other photos to the images folder.
+   If a photo is missing, the gradient after the comma is shown. */
+body.clear  { background-image: url("wethar.jpg"),        linear-gradient(160deg, #2f80ed, #8fd3ff); }
+body.cloudy { background-image: url("wethar.jpg"), linear-gradient(160deg, #5d6c80, #aab6c4); }
+body.rain   { background-image: url("images/rain.jpg"),   linear-gradient(160deg, #26384a, #4b6584); }
+body.snow   { background-image: url("images/snow.jpg"),   linear-gradient(160deg, #8fb0cc, #dbe7f2); }
+body.storm  { background-image: url("images/storm.jpg"),  linear-gradient(160deg, #1b1830, #4a3f6b); }
+
+@media (max-width: 380px) {
+  .temp { font-size: 5.5rem; }
+  .card { padding: 28px 18px 24px; }
+}

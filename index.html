@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Live Weather</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app">
+
+    <form id="searchForm" class="search">
+      <input id="cityInput" type="text" placeholder="Search city or town" aria-label="Search city" required>
+      <button type="submit">Search</button>
+    </form>
+
+    <button id="locBtn" type="button" class="loc-btn">Use my current location</button>
+
+    <p id="message" class="message"></p>
+    <ul id="suggestions" class="suggestions"></ul>
+
+    <!-- Vertical weather card -->
+    <section id="result" class="card" hidden>
+      <h2 id="place" class="place"></h2>
+      <p id="updated" class="updated"></p>
+
+      <p id="temp" class="temp"></p>
+      <p id="condition" class="condition"></p>
+
+      <dl class="details">
+        <div><dt>Feels like</dt><dd id="feels"></dd></div>
+        <div><dt>Humidity</dt><dd id="humidity"></dd></div>
+        <div><dt>Wind</dt><dd id="wind"></dd></div>
+      </dl>
+
+      <h3 class="forecast-title">Next 5 days</h3>
+      <ul id="forecast" class="forecast"></ul>
+    </section>
+
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
